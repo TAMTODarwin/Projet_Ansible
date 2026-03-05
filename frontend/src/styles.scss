@@ -1,0 +1,183 @@
+// ─── Angular Material custom theme (no Google Fonts import) ────────────────
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-palette: mat.define-palette(mat.$indigo-palette);
+$accent-palette:  mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$warn-palette:    mat.define-palette(mat.$red-palette);
+
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent:  $accent-palette,
+    warn:    $warn-palette,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'Inter, Roboto, sans-serif',
+  ),
+  density: 0,
+));
+
+@include mat.all-component-themes($theme);
+
+/* All fonts served locally via @fontsource — no external network requests */
+
+/* Material Icons — local font (no Google Fonts dependency) */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/material-icons.woff2') format('woff2'),
+       url('/fonts/material-icons.woff') format('woff');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Global Reset ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 15px;
+  background: #f1f5f9;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ─── Typography helpers ────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.25;
+}
+
+a { text-decoration: none; }
+
+/* ─── Snackbar custom styles ────────────────────────────── */
+.snack-success {
+  background: #16a34a !important;
+  color: #fff !important;
+
+  .mat-mdc-button.mat-mdc-snack-bar-action { color: rgba(255,255,255,0.85) !important; }
+  .mdc-snackbar__surface { background: #16a34a !important; }
+}
+
+.snack-error {
+  background: #dc2626 !important;
+  color: #fff !important;
+
+  .mat-mdc-button.mat-mdc-snack-bar-action { color: rgba(255,255,255,0.85) !important; }
+  .mdc-snackbar__surface { background: #dc2626 !important; }
+}
+
+.snack-info {
+  background: #2563eb !important;
+  color: #fff !important;
+
+  .mat-mdc-button.mat-mdc-snack-bar-action { color: rgba(255,255,255,0.85) !important; }
+  .mdc-snackbar__surface { background: #2563eb !important; }
+}
+
+.mdc-snackbar__label { color: #fff !important; }
+
+/* ─── Angular Material overrides ────────────────────────── */
+
+/* Rounded cards */
+.mat-mdc-card {
+  border-radius: 16px !important;
+}
+
+/* Tables */
+.mat-mdc-table {
+  background: transparent !important;
+
+  .mat-mdc-header-row { background: #f8fafc; }
+  .mat-mdc-row:hover { background: #f8fafc !important; }
+}
+
+/* Form fields */
+.mat-mdc-form-field {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-color: #e2e8f0 !important;
+  }
+
+  &:hover {
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__trailing,
+    .mdc-notched-outline__notch {
+      border-color: #94a3b8 !important;
+    }
+  }
+}
+
+/* Primary button */
+.mat-mdc-raised-button.mat-primary {
+  background: #2563eb !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  height: 42px !important;
+}
+
+.mat-mdc-outlined-button {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  height: 40px !important;
+}
+
+/* Paginator */
+.mat-mdc-paginator { background: transparent !important; }
+
+/* ─── Page layout helpers ───────────────────────────────── */
+.page-container {
+  padding: 28px 32px;
+
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
+}
+
+/* ─── Dialog ────────────────────────────────────────────── */
+.mat-mdc-dialog-container {
+  .mdc-dialog__surface { border-radius: 16px !important; }
+}
+
+/* ─── Chips ─────────────────────────────────────────────── */
+.mat-mdc-chip { border-radius: 8px !important; font-weight: 600 !important; }
+
+/* ─── Utility classes ───────────────────────────────────── */
+.text-primary   { color: #2563eb; }
+.text-success   { color: #16a34a; }
+.text-warning   { color: #d97706; }
+.text-danger    { color: #dc2626; }
+.text-muted     { color: #94a3b8; }
+.fw-600         { font-weight: 600; }
+.fw-700         { font-weight: 700; }
