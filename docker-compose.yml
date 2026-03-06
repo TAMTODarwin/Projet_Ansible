@@ -41,7 +41,7 @@ services:
       dockerfile: Dockerfile
     container_name: invoice-frontend
     ports:
-      - "8080:8080"
+      - "4200:4200"
     depends_on:
       - backend
     networks:
